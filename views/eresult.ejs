@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - Simulado LPIC-1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans antialiased flex flex-col min-h-screen">
+    <header class="bg-blue-600 text-white p-6 text-center">
+        <h1 class="text-3xl font-bold">Simulado Entry Level (LPIC-1)</h1>
+    </header>
+
+    <main class="py-12 px-6 flex-grow">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Resultados do Simulado</h2>
+            <p class="text-xl text-gray-700 mb-4 text-center">Você acertou <%= correctAnswers %> de <%= totalQuestions %> questões (<%= percentage.toFixed(2) %>%).</p>
+            <% const passingScore = Math.ceil(totalQuestions * 0.7); // 70% das questões %>
+            <p class="text-2xl font-bold text-center mb-8 <%= correctAnswers >= passingScore ? 'text-green-600' : 'text-red-600' %>">
+                <%= correctAnswers >= passingScore ? 'Aprovado' : 'Reprovado' %>
+            </p>
+            <div class="space-y-6">
+                <% answers.forEach((answer, index) => { %>
+                    <div class="p-6 rounded-lg shadow-md border-l-4 <%= answer.isCorrect ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500' %>">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Questão <%= index + 1 %>: <%= answer.question %></h3>
+                        <p class="text-gray-700">Sua resposta: <span class="<%= answer.isCorrect ? 'text-green-600' : 'text-red-600' %> font-medium"><%= answer.userAnswer %></span></p>
+                        <p class="text-gray-700">Resposta correta: <span class="text-green-600 font-medium"><%= answer.correct %></span></p>
+                    </div>
+                <% }); %>
+            </div>
+            <div class="mt-6 text-center">
+                <a href="/select" class="bg-blue-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition duration-300">Refazer simulado</a>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+</body>
+</html>

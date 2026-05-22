@@ -1,0 +1,37 @@
+<%- include ('partials/header') %>
+<body class="bg-gray-100 font-sans antialiased flex flex-col min-h-screen">
+    <header class="bg-blue-600 text-white p-6 text-center">
+        <h1 class="text-3xl font-bold">LPI Essentials 010-160</h1>
+        <p class="text-xl mt-2">Selecione o simulado desejado:</p>
+    </header>
+    <main class="py-12 px-6 flex-grow">
+        <div class="max-w-7xl mx-auto text-center">
+            <section class="flex justify-center space-x-4">
+                <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Simulado 1</div>
+                        <p class="text-gray-700 text-base mb-6">
+                            Simulado completo contendo 54 questões de múltipla escolha com 60 minutos de duração.
+                          </p>
+                        <a href="/essentials" class="bg-blue-500 text-white py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition duration-300">
+                            Iniciar
+                        </a>
+                    </div>
+                </div>
+                <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Simulado 2</div>
+                        <p class="text-gray-700 text-base mb-6">
+                            Simulado completo contendo 54 questões de múltipla escolha com 60 minutos de duração.
+                          </p>
+                        <a href="/essentials2" class="bg-blue-500 text-white py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition duration-300">
+                            Iniciar
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <%- include('partials/footer') %>
+</body>
+</html>

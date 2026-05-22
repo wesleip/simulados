@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans antialiased flex flex-col min-h-screen">
+    <header class="bg-blue-600 text-white p-6 flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Dashboard</h1>
+        <a href="/logout" class="bg-red-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-red-700 transition duration-300">Sair</a>
+    </header>
+
+    <main class="py-12 px-6 flex-grow">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Estatísticas de Submissões</h2>
+            
+            <!-- Simulado 1 -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">Simulado 1</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Questões</h4>
+                        <p class="text-3xl font-bold text-blue-600"><%= questionCount1 %></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Média de Acertos</h4>
+                        <p class="text-3xl font-bold text-green-600"><%= avgCorrect1 %></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Finalizações</h4>
+                        <p class="text-3xl font-bold text-purple-600"><%= submissionCount1 %></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Taxa de Aprovação</h4>
+                        <p class="text-3xl font-bold text-teal-600"><%= approvalRate1 %>%</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Distribuição</h4>
+                        <p class="text-sm text-gray-600">0-20: <%= distribution1.low %></p>
+                        <p class="text-sm text-gray-600">21-37: <%= distribution1.medium %></p>
+                        <p class="text-sm text-gray-600">38+: <%= distribution1.high %></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Simulado 2 -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">Simulado 2</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Questões</h4>
+                        <p class="text-3xl font-bold text-blue-600"><%= questionCount2 %></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Média de Acertos</h4>
+                        <p class="text-3xl font-bold text-green-600"><%= avgCorrect2 %></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Finalizações</h4>
+                        <p class="text-3xl font-bold text-purple-600"><%= submissionCount2 %></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Taxa de Aprovação</h4>
+                        <p class="text-3xl font-bold text-teal-600"><%= approvalRate2 %>%</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Distribuição</h4>
+                        <p class="text-sm text-gray-600">0-20: <%= distribution2.low %></p>
+                        <p class="text-sm text-gray-600">21-37: <%= distribution2.medium %></p>
+                        <p class="text-sm text-gray-600">38+: <%= distribution2.high %></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gráfico -->
+            <section>
+                <h3 class="text-xl font-semibold text-gray-700 mb-4 text-center">Distribuição de Acertos</h3>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <canvas id="distributionChart" height="100"></canvas>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script>
+        const ctx = document.getElementById('distributionChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['0-20 acertos', '21-37 acertos', '38+ acertos'],
+                datasets: [
+                    {
+                        label: 'Simulado 1',
+                        data: [<%= distribution1.low %>, <%= distribution1.medium %>, <%= distribution1.high %>],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Simulado 2',
+                        data: [<%= distribution2.low %>, <%= distribution2.medium %>, <%= distribution2.high %>],
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Número de Submissões' }
+                    },
+                    x: {
+                        title: { display: true, text: 'Faixas de Acertos' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Distribuição de Acertos por Simulado' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

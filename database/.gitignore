@@ -1,0 +1,5 @@
+# Ignorar arquivos .db
+*.db
+
+# Não ignorar o arquivo .gitkeep (se necessário)
+!.gitkeep

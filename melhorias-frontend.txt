@@ -1,0 +1,216 @@
+MELHORIAS FRONTEND - SIMULADOS LPI
+Gerado em: 2026-05-22
+Ordenadas por prioridade de implementação (1 = mais urgente)
+=======================================================================
+
+-----------------------------------------------------------------------
+GRUPO 1 — BUGS / COMPORTAMENTO QUEBRADO (implementar primeiro)
+-----------------------------------------------------------------------
+
+[1] Arquivo CSS referenciado mas inexistente
+    Arquivo: views/partials/header.ejs, linha 7
+    Problema: <link rel="stylesheet" href="/css/style.css"> aponta para
+    um arquivo que não existe em public/. Causa erro 404 silencioso em
+    todas as páginas que usam o partial.
+    Correção: Criar public/css/style.css (mesmo que vazio) ou remover a
+    tag enquanto não houver estilos customizados.
+
+[2] console.log de debug exposto em produção
+    Arquivo: views/essentials.ejs linha 155 / views/essentials2.ejs linha 155
+    Problema: console.log("Respostas do usuário atualizadas:", userAnswers)
+    vaza dados de respostas no console do browser de qualquer usuário.
+    Correção: Remover as duas ocorrências.
+
+[3] Variável isTransitioning nunca é definida como true
+    Arquivo: views/essentials.ejs e essentials2.ejs
+    Problema: A flag isTransitioning é declarada e checada em nextQuestion()
+    e prevQuestion(), mas nunca é atribuída como true em nenhum ponto do
+    código. A proteção contra duplo clique não funciona.
+    Correção: Definir isTransitioning = true no início de nextQuestion/
+    prevQuestion e false após carregar a questão, ou remover a variável.
+
+[4] H2 vazio no dashboard de gerenciamento
+    Arquivo: views/management.ejs, linha 18
+    Problema: <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center"></h2>
+    é um elemento de cabeçalho sem conteúdo, ocupa espaço em branco
+    desnecessário e é problemático para acessibilidade.
+    Correção: Adicionar texto (ex: "Estatísticas de Submissões") ou remover
+    o elemento.
+
+-----------------------------------------------------------------------
+GRUPO 2 — DUPLICAÇÃO DE CÓDIGO (alto impacto na manutenção)
+-----------------------------------------------------------------------
+
+[5] essentials.ejs e essentials2.ejs são 100% idênticos
+    Arquivo: views/essentials.ejs e views/essentials2.ejs
+    Problema: Os dois arquivos têm exatamente o mesmo conteúdo — HTML,
+    lógica JavaScript e estilos. Qualquer correção precisa ser feita duas
+    vezes, e ao adicionar um Simulado 3 o problema se repete.
+    Correção: Unificar em um único template views/simulado.ejs. A rota
+    pode passar o número do simulado como variável EJS (ex: simuladoNum)
+    para diferenciar título ou qualquer detalhe específico.
+
+-----------------------------------------------------------------------
+GRUPO 3 — UX: MELHORIAS RÁPIDAS (baixo esforço, alto ganho)
+-----------------------------------------------------------------------
+
+[6] Nenhum feedback visual ao selecionar uma resposta
+    Arquivo: views/essentials.ejs (e essentials2.ejs), função loadQuestion()
+    Problema: Ao clicar em uma opção, apenas o radio/checkbox muda. O item
+    de lista não destaca visualmente a seleção, tornando difícil saber o
+    que foi escolhido, especialmente em questões com opções longas.
+    Correção: Ao clicar em uma opção, adicionar classes Tailwind ao <li>
+    pai (ex: bg-blue-50 border-l-4 border-blue-500) e removê-las das
+    demais opções. Tornar o <li> inteiro clicável (pointer-cursor + evento
+    de clique no elemento, não só no input).
+
+[7] Timer sem alerta visual quando o tempo está acabando
+    Arquivo: views/essentials.ejs, função updateTimer()
+    Problema: O timer mostra o tempo restante em cinza fixo até chegar a
+    zero. Usuários não percebem quando o tempo está curto.
+    Correção: Quando timeRemaining <= 300 (5 minutos), trocar a classe do
+    elemento #timer para text-red-600 font-bold e adicionar um pulso CSS
+    (animate-pulse do Tailwind). Quando <= 60s, mostrar alerta mais intenso.
+
+[8] Nenhuma contagem de questões sem resposta ao finalizar
+    Arquivo: views/essentials.ejs, função finishSimulado()
+    Problema: O confirm() atual não informa quantas questões ficaram sem
+    resposta. O usuário pode finalizar acidentalmente sem saber que deixou
+    questões em branco.
+    Correção: Antes do confirm(), calcular
+    const unanswered = userAnswers.filter(a => a === null).length;
+    e incluir no texto: "Você tem X questão(ões) sem resposta. Deseja
+    finalizar mesmo assim?"
+
+[9] Botões de simulados indisponíveis (LPIC-1/2/3) sem indicação clara
+    Arquivo: views/index.ejs, linhas 35, 44, 53
+    Problema: Os cards de LPIC-1, LPIC-2 e LPIC-3 têm o mesmo visual
+    azul ativo dos disponíveis. Apenas cursor-not-allowed diferencia,
+    o que não é perceptível. Usuários tentam clicar e nada acontece.
+    Correção: Trocar bg-blue-600 para bg-gray-400 nesses botões, adicionar
+    texto "Em breve" no lugar de "Iniciar Simulado", e adicionar um badge
+    "Indisponível" no canto do card.
+
+[10] Página de resultados sem distinção visual por card (correto/errado)
+     Arquivo: views/eresult.ejs, linhas 23–29
+     Problema: Todos os cards de resultado têm fundo branco igual. A
+     diferença entre acerto e erro está apenas na cor do texto da resposta,
+     o que exige ler cada linha individualmente.
+     Correção: Adicionar classe condicional ao card:
+     answer.isCorrect ? 'border-l-4 border-green-500 bg-green-50'
+                      : 'border-l-4 border-red-500 bg-red-50'
+     Isso permite identificar acertos/erros com um único olhar.
+
+-----------------------------------------------------------------------
+GRUPO 4 — UX: MELHORIAS MÉDIAS (esforço moderado)
+-----------------------------------------------------------------------
+
+[11] Sem navegação direta entre questões (question map)
+     Arquivo: views/essentials.ejs
+     Problema: Para ir da questão 1 à questão 40, o usuário precisa clicar
+     "Próxima" 39 vezes. Não há como pular para uma questão específica.
+     Correção: Adicionar um painel lateral ou grade numérica (1..54) acima
+     do container de questão. Cada número clicável leva diretamente à
+     questão. Questões respondidas ficam azuis, sem resposta ficam cinza,
+     questão atual fica com borda destacada.
+
+[12] Sem barra de progresso
+     Arquivo: views/essentials.ejs
+     Problema: O contador "Questão X/54" não dá sensação de progresso
+     nem distingue questões respondidas das não respondidas.
+     Correção: Adicionar uma barra de progresso Tailwind abaixo do timer:
+     <div class="bg-gray-200 rounded-full h-2">
+       <div class="bg-blue-600 h-2 rounded-full" style="width: X%"></div>
+     </div>
+     Onde X = (questões respondidas / total) * 100.
+
+[13] Títulos de página genéricos (tag <title> fixa no partial)
+     Arquivo: views/partials/header.ejs, linha 5
+     Problema: Todas as páginas têm o mesmo <title>: "Simulados Completos
+     - Linux Professional Institute". Isso prejudica navegação por abas
+     do browser e SEO.
+     Correção: Aceitar uma variável EJS no partial (ex: pageTitle) e usá-la:
+     <title><%= pageTitle || 'Simulados LPI' %></title>
+     Cada rota passa o título correspondente ao res.render().
+
+[14] Link "Refazer Simulado" na página de erro sempre aponta para /essentials
+     Arquivo: views/error.ejs, linha 18
+     Problema: O botão hardcoda href="/essentials" independente de qual
+     simulado gerou o erro. Se o usuário veio do /essentials2, será
+     redirecionado para o simulado errado.
+     Correção: A rota que renderiza o erro deve passar uma variável
+     retryUrl, e o template usar href="<%= retryUrl %>".
+
+-----------------------------------------------------------------------
+GRUPO 5 — ESTRUTURA / MANUTENIBILIDADE
+-----------------------------------------------------------------------
+
+[15] Páginas de login, resultado e management não usam o partial header.ejs
+     Arquivos: views/login.ejs, views/eresult.ejs, views/management.ejs
+     Problema: Cada um define seu próprio <!DOCTYPE html>, <head> e
+     carrega Tailwind individualmente. Qualquer mudança global (ex: adicionar
+     um script, mudar o charset) precisa ser feita em múltiplos arquivos.
+     Correção: Substituir os cabeçalhos inline pelo partial
+     <%- include('partials/header') %> em todas as views. Ajustar o partial
+     para aceitar pageTitle (ver item 13).
+
+[16] JavaScript inline nas views (essentials e essentials2)
+     Arquivo: views/essentials.ejs e essentials2.ejs
+     Problema: Todo o JavaScript (~220 linhas) está dentro de <script> no
+     template EJS. Isso mistura lógica de apresentação com lógica de
+     comportamento, dificulta cache do browser e impede reuso entre views.
+     Correção: Mover para public/js/simulado.js. As variáveis que vêm do
+     servidor (questions, initialQuestionIndex) podem ser injetadas em uma
+     <script> mínima antes de carregar o arquivo externo:
+     <script>
+       window.SIMULADO = { questions: <%- JSON.stringify(questions) %>, ... };
+     </script>
+     <script src="/js/simulado.js"></script>
+
+[17] Tailwind via CDN em todas as páginas
+     Arquivo: views/partials/header.ejs e outras views
+     Problema: A tag <script src="https://cdn.tailwindcss.com"> carrega
+     o engine completo do Tailwind (~350KB) no browser de cada usuário,
+     a cada página. Não há purge de classes não usadas, é lento e ineficiente.
+     Correção: Configurar Tailwind CLI como dependência de desenvolvimento
+     para gerar um CSS compilado e purgado em public/css/tailwind.css.
+     Substituir o script CDN pelo <link> estático.
+     Referência: https://tailwindcss.com/docs/installation
+
+-----------------------------------------------------------------------
+GRUPO 6 — POLISH / EXPERIÊNCIA FINAL
+-----------------------------------------------------------------------
+
+[18] Nenhum favicon definido
+     Arquivo: views/partials/header.ejs
+     Problema: Sem favicon, o browser exibe um ícone genérico na aba e
+     faz uma requisição 404 para /favicon.ico a cada carregamento de página.
+     Correção: Adicionar um favicon (pode ser um SVG simples com as letras
+     LPI) em public/img/favicon.svg e linkar no header:
+     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+
+[19] Estado de carregamento ausente ao submeter o simulado
+     Arquivo: views/essentials.ejs, função finishSimulado()
+     Problema: Ao clicar em Finalizar, o fetch() é feito e o usuário fica
+     na mesma tela sem nenhum indicador enquanto espera o POST completar.
+     Se a rede for lenta, parece que nada aconteceu.
+     Correção: Após confirmar o encerramento, desabilitar o botão Finalizar
+     e exibir um spinner ou texto "Calculando resultados..." até o redirect.
+
+[20] Página de resultados sem opção de filtrar apenas questões erradas
+     Arquivo: views/eresult.ejs
+     Problema: Com 54 questões listadas, a página fica muito longa. Usuários
+     que querem revisar apenas os erros precisam rolar a página inteira.
+     Correção: Adicionar dois botões de filtro acima da lista:
+     "Mostrar todas" / "Mostrar apenas erros". Implementar com JavaScript
+     puro que toggle a visibilidade dos cards corretos.
+
+=======================================================================
+RESUMO POR ESFORÇO
+=======================================================================
+
+Baixo esforço  (< 30 min cada): 1, 2, 3, 4, 7, 8, 9, 10, 14, 18
+Médio esforço  (30–90 min cada): 5, 6, 11, 12, 13, 15, 16, 19, 20
+Alto esforço   (> 90 min):       17
+
+=======================================================================

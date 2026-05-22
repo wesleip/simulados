@@ -1,0 +1,283 @@
+<%- include ('partials/header') %>
+
+<body class="bg-gray-100 font-sans antialiased">
+    <header class="bg-blue-600 text-white p-6 text-center">
+        <h1 class="text-3xl font-bold">Simulado LPI Essentials</h1>
+        <p class="text-xl mt-2">Prepare-se para o exame de certificação Linux Professional Institute</p>
+    </header>
+
+    <main class="py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Timer e botões de controle -->
+            <section class="mb-8 text-center">
+                <p id="timer" class="text-xl font-semibold text-gray-700">Tempo restante: 60:00</p>
+            </section>
+
+            <section class="text-center">
+                <button id="startBtn" class="bg-blue-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition duration-300">Iniciar Simulado</button>                
+                <button id="pauseBtn" class="bg-yellow-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-yellow-700 transition duration-300 mt-4" disabled>Pausar</button>                
+                <button id="resumeBtn" class="bg-green-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-green-700 transition duration-300 mt-4" disabled>Retomar</button>
+            </section>
+
+            <!-- Container da Questão -->
+            <section class="mt-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Questão <span id="question-counter">1/X</span></h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                    <div id="question-container">
+                        <h3 id="question-text"></h3>
+                        <ul id="options-list" class="list-unstyled"></ul>
+                    </div>
+                </div>
+
+                <!-- Botões de Navegação -->
+                <section class="text-center mt-8">
+                    <button id="prevButton" class="bg-gray-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-gray-700 transition duration-300 mr-4">
+                        Questão Anterior
+                    </button>
+                    <button id="nextButton" class="bg-blue-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition duration-300">
+                        Próxima Questão
+                    </button>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script>
+        // Variáveis globais
+        const questions = <%- JSON.stringify(questions) %>;
+        let currentQuestionIndex = <%- initialQuestionIndex %>;
+        let isTransitioning = false;
+        let userAnswers = new Array(questions.length).fill(null); // Para rastrear respostas do usuário
+        
+        // Variáveis do timer
+        let timer;
+        let timeRemaining = 60 * 60; // 60 minutos em segundos
+        let isTimerRunning = false;
+        let isTimerPaused = false;
+
+        // Elementos DOM
+        const questionTextEl = document.getElementById('question-text');
+        const optionsListEl = document.getElementById('options-list');
+        const prevButtonEl = document.getElementById('prevButton');
+        const nextButtonEl = document.getElementById('nextButton');
+        const questionCounterEl = document.getElementById('question-counter');
+        const startBtnEl = document.getElementById('startBtn');
+        const pauseBtnEl = document.getElementById('pauseBtn');
+        const resumeBtnEl = document.getElementById('resumeBtn');
+
+        // Função para carregar a questão atual
+        function loadQuestion() {
+            if (currentQuestionIndex < 0 || currentQuestionIndex >= questions.length) {
+                console.error("Índice de questão inválido");
+                return;
+            }
+            
+            const question = questions[currentQuestionIndex];
+            questionTextEl.textContent = question.question || "Questão sem texto";
+            optionsListEl.innerHTML = '';
+
+            try {
+                const options = typeof question.options === 'string' ? 
+                    JSON.parse(question.options) : 
+                    question.options;
+                const isMultiple = question.answer.includes(", "); // Detecta múltiplas respostas
+
+                options.forEach((option, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'mb-2';
+                    
+                    const input = document.createElement('input');
+                    input.type = isMultiple ? 'checkbox' : 'radio';
+                    input.name = `question-${currentQuestionIndex}`;
+                    input.id = `option-${currentQuestionIndex}-${index}`;
+                    input.value = option;
+                    input.className = 'mr-2';
+                    
+                    // Preenche as respostas salvas
+                    if (isMultiple) {
+                        if (Array.isArray(userAnswers[currentQuestionIndex]) && 
+                            userAnswers[currentQuestionIndex].includes(option)) {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (userAnswers[currentQuestionIndex] === option) {
+                            input.checked = true;
+                        }
+                    }
+                    
+                    const label = document.createElement('label');
+                    label.htmlFor = input.id;
+                    label.textContent = option;
+                    
+                    li.appendChild(input);
+                    li.appendChild(label);
+                    optionsListEl.appendChild(li);
+
+                    input.addEventListener('change', updateUserAnswer);
+                });
+            } catch (error) {
+                console.error("Erro ao carregar opções:", error);
+                optionsListEl.innerHTML = '<li class="text-red-500">Erro ao carregar as opções</li>';
+            }
+
+            updateUI();
+            isTransitioning = false;
+        }
+
+        // Atualiza a interface do usuário
+        function updateUI() {
+            if (!questions || questions.length === 0) {
+                questionCounterEl.textContent = "0/0";
+                questionTextEl.textContent = "Nenhuma questão disponível";
+                return;
+            }
+            
+            questionCounterEl.textContent = `${currentQuestionIndex + 1}/${questions.length}`;
+            prevButtonEl.disabled = currentQuestionIndex === 0;
+            nextButtonEl.textContent = currentQuestionIndex === questions.length - 1 ? 'Finalizar' : 'Próxima Questão';
+        }
+
+        // Função para atualizar a resposta do usuário
+        function updateUserAnswer() {
+            const question = questions[currentQuestionIndex];
+            const isMultiple = question.answer.includes(", ");
+            
+            if (isMultiple) {
+                const checkedOptions = Array.from(document.querySelectorAll(`input[name="question-${currentQuestionIndex}"]:checked`))
+                    .map(input => input.value);
+                userAnswers[currentQuestionIndex] = checkedOptions.length > 0 ? checkedOptions : null;
+            } else {
+                const selectedOption = document.querySelector(`input[name="question-${currentQuestionIndex}"]:checked`);
+                userAnswers[currentQuestionIndex] = selectedOption ? selectedOption.value : null;
+            }
+        }
+
+        // Navegação entre questões
+        function nextQuestion() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                isTransitioning = false;
+                finishSimulado();
+            }
+        }
+
+        function prevQuestion() {
+            if (isTransitioning || currentQuestionIndex <= 0) return;
+            isTransitioning = true;
+
+            currentQuestionIndex--;
+            loadQuestion();
+        }
+
+        function finishSimulado() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            const msg = unanswered > 0
+                ? `Você tem ${unanswered} questão(ões) sem resposta. Deseja finalizar mesmo assim?`
+                : 'Deseja finalizar o simulado?';
+            if (confirm(msg)) {
+                clearInterval(timer);
+                
+                fetch('/eresult', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        questions: questions,
+                        userAnswers: userAnswers.map(answer => answer === null ? "Não respondida" : answer)
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = "/eresult";
+                })
+                .catch(error => console.error('Erro ao enviar respostas:', error));
+            }
+        }
+
+        // Funções do timer
+        function startTimer() {
+            if (isTimerRunning) return;
+            
+            isTimerRunning = true;
+            startBtnEl.disabled = true;
+            pauseBtnEl.disabled = false;
+            
+            timer = setInterval(updateTimer, 1000);
+        }
+
+        function pauseTimer() {
+            if (!isTimerRunning || isTimerPaused) return;
+            
+            isTimerPaused = true;
+            pauseBtnEl.disabled = true;
+            resumeBtnEl.disabled = false;
+        }
+
+        function resumeTimer() {
+            if (!isTimerRunning || !isTimerPaused) return;
+            
+            isTimerPaused = false;
+            pauseBtnEl.disabled = false;
+            resumeBtnEl.disabled = true;
+        }
+
+        function updateTimer() {
+            if (isTimerPaused) return;
+
+            if (timeRemaining <= 0) {
+                clearInterval(timer);
+                alert("O tempo acabou!");
+                finishSimulado();
+                return;
+            }
+
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            const timerEl = document.getElementById("timer");
+            timerEl.textContent = `Tempo restante: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+            if (timeRemaining <= 60) {
+                timerEl.className = 'text-xl font-bold text-red-700 animate-pulse';
+            } else if (timeRemaining <= 300) {
+                timerEl.className = 'text-xl font-bold text-red-600';
+            } else {
+                timerEl.className = 'text-xl font-semibold text-gray-700';
+            }
+
+            timeRemaining--;
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!questions || questions.length === 0) {
+                console.error("Nenhuma questão foi carregada");
+                questionTextEl.textContent = "Nenhuma questão disponível";
+                return;
+            }
+            
+            loadQuestion();
+            
+            nextButtonEl.addEventListener('click', nextQuestion);
+            prevButtonEl.addEventListener('click', prevQuestion);
+            
+            startBtnEl.addEventListener('click', startTimer);
+            pauseBtnEl.addEventListener('click', pauseTimer);
+            resumeBtnEl.addEventListener('click', resumeTimer);
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextQuestion();
+                if (e.key === 'ArrowLeft') prevQuestion();
+            });
+        });
+    </script>
+</body>
+</html>

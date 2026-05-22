@@ -1,0 +1,272 @@
+[
+    {
+      "question": "Qual dos seguintes é um sistema operacional baseado em Linux para uso em dispositivos móveis?",
+      "options": ["Android", "CentOS", "Debian", "iOS"],
+      "answer": "Android"
+    },
+    {
+      "question": "Quais dos seguintes comandos irão definir a variável text para 'olaf is home' ?",
+      "options": ["text=$olaf is home", "text='olaf is home'", "text=='olaf is home'", "text=olaf\\ is\\ home", "text=\"olaf is home\""],
+      "answer": "text=\"olaf is home\""
+    },
+    {
+      "question": "Quais das seguintes distribuições Linux utilizam o sistema de gerenciamento de pacotes dpkg? (Escolha DUAS respostas corretas)",
+      "options": ["Ubuntu", "Red Hat", "Debian", "Suse", "Mandriva"],
+      "answer": "Ubuntu, Debian"
+    },
+    {
+      "question": "Como é possível determinar se um arquivo executável é um script shell lido pelo Bash?",
+      "options": ["O bit r está configurado.", "Scripts nunca são arquivos executáveis.", "A primeira linha começa com #!/bin/bash.", "O arquivo deve terminar com .sh.", "/bin/bash deve ser executado no modo de depuração."],
+      "answer": "A primeira linha começa com #!/bin/bash."
+    },
+    {
+      "question": "Qual é a saída do seguinte comando?\n$ tail -n 20 test.txt",
+      "options": ["As últimas 20 linhas de test.txt com números de linha.", "As últimas 20 linhas de test.txt omitindo as linhas em branco.", "As últimas 20 linhas de test.txt incluindo as linhas em branco.", "As primeiras 20 linhas de test.txt."],
+      "answer": "As últimas 20 linhas de test.txt incluindo as linhas em branco."
+    },
+    {
+      "question": "Ao excluir todos os arquivos começando com a letra a, ainda ficou o arquivo Access.txt. Assumindo que ele tenha a propriedade correta, por que ele não foi excluído?",
+      "options": ["Os nomes de arquivos no Linux são sensíveis a maiúsculas e minúsculas.", "Arquivos com extensões precisam de tratamento diferente.", "O arquivo Access.txt provavelmente estava aberto por outro aplicativo.", "O rm teve que ser chamado com a opção -R para excluir todos os arquivos.", "O arquivo Access.txt estava oculto."],
+      "answer": "Os nomes de arquivos no Linux são sensíveis a maiúsculas e minúsculas."
+    },
+    {
+      "question": "Qual afirmação sobre usuários e grupos de usuários é correta?",
+      "options": ["Todo usuário pertence a pelo menos um grupo de usuários.", "Um grupo pode ter apenas um usuário principal.", "Pode haver apenas um grupo de usuários no sistema.", "Usuários não precisam pertencer a um grupo de usuários."],
+      "answer": "Todo usuário pertence a pelo menos um grupo de usuários."
+    },
+    {
+      "question": "Qual das seguintes afirmações pode ser usada para acessar o segundo argumento da linha de comando para um script?",
+      "options": ["\"$1\"", "\"$2\"", "\"$3\"", "$ARG2"],
+      "answer": "\"$2\""
+    },
+    {
+      "question": "Por que o arquivo data.txt está vazio após executar sort data.txt > data.txt?",
+      "options": ["Porque o arquivo é truncado antes que o sort seja executado.", "Porque o sort não pode ordenar arquivos de texto, apenas arquivos binários.", "Porque, se data.txt está vazio agora, é porque já estava vazio antes.", "Porque o sort detecta que ambos os arquivos são os mesmos."],
+      "answer": "Porque o arquivo é truncado antes que o sort seja executado."
+    },
+    {
+      "question": "Quais são os comandos corretos para mudar o diretório atual para o diretório home do usuário? (Escolha DUAS respostas corretas)",
+      "options": ["cd ..", "cd", "cd /", "cd /home", "cd ~"],
+      "answer": "cd, cd ~"
+    },
+    {
+      "question": "Qual é a fonte preferida para a instalação de novos aplicativos?",
+      "options": ["O site do fornecedor", "O sistema de gerenciamento de versão do fornecedor", "Um CD-ROM", "Uma loja de varejo", "O repositório de pacotes da distribuição"],
+      "answer": "O repositório de pacotes da distribuição"
+    },
+    {
+      "question": "Qual comando pode ser usado para extrair arquivos de um arquivo compactado?",
+      "options": ["tar -v", "tar -xvf", "tar -evf", "tar -vf", "tar -e"],
+      "answer": "tar -xvf"
+    },
+    {
+      "question": "Quais aplicativos são usados para reproduzir um arquivo MP3 em um sistema Linux? (Escolha três respostas corretas)",
+      "options": ["Audacious", "Xara Xtreme", "Amarok", "LibreOffice Player", "Banshee"],
+      "answer": "Audacious, Amarok, Banshee"
+    },
+    {
+      "question": "Qual comando você usaria para obter documentação abrangente sobre qualquer comando no Linux?",
+      "options": ["locate command", "man command", "echo command", "help command", "get command"],
+      "answer": "man command"
+    },
+    {
+      "question": "Como você pode procurar o arquivo foo.txt no diretório /home?",
+      "options": ["find /home -name foo.txt", "find /home foo.txt", "search /home foo.txt", "find /home -file foo.txt", "search /home -file foo.txt"],
+      "answer": "find /home -name foo.txt"
+    },
+    {
+      "question": "Qual comando mostra se /usr/bin está no caminho de busca atual do shell?",
+      "options": ["cat $PATH", "echo $PATH", "echo %PATH%", "cat PATH", "echo %PATH"],
+      "answer": "echo $PATH"
+    },
+    {
+      "question": "Qual das seguintes afirmações sobre senhas no Linux é verdadeira?",
+      "options": ["As senhas são armazenadas apenas em forma criptografada.", "Os usuários não podem alterar suas senhas depois de definidas.", "Todas as senhas podem ser descriptografadas usando a senha mestre do administrador do sistema.", "As senhas nunca podem começar com um caractere não alfabético.", "As senhas podem ter no máximo seis caracteres."],
+      "answer": "As senhas são armazenadas apenas em forma criptografada."
+    },
+    {
+      "question": "Qual dos seguintes comandos exibirá todas as linhas que contêm a string Fred ou fred? (Escolha DUAS respostas corretas.)",
+      "options": ["grep \"[Ff]red\" data_file", "grep -v fred data_file", "grep \"[f]red\" data_file", "grep -i fred data_file", "egrep fred data_file"],
+      "answer": "grep '[Ff]red' data_file, grep -i fred data_file"
+    },
+    {
+      "question": "Quais comandos fornecem ajuda para um comando específico do Linux? (Escolha DUAS respostas corretas.)",
+      "options": ["info", "man", "ask", "whatdoes", "helpme"],
+      "answer": "info, man"
+    },
+    {
+      "question": "A seguinte linha é encontrada em qual arquivo do sistema?\n\nroot:x:0:0::/root:/bin/bash",
+      "options": ["/usr/bin/shadow", "/etc/shadow", "/etc/password", "/etc/passwd", "/etc/user.conf"],
+      "answer": "/etc/passwd"
+    },
+    {
+      "question": "Quais comandos irão arquivar /home e seu conteúdo para /mnt/backup? (Escolha DUAS respostas corretas.)",
+      "options": ["mv /home /mnt/backup", "sync -r /home /mnt/backup", "copy -r /home /mnt/backup", "tar -cf /mnt/backup/archive.tar /home", "cp -ar /home /mnt/backup"],
+      "answer": "tar -cf /mnt/backup/archive.tar /home, cp -ar /home /mnt/backup"
+    },
+    {
+      "question": "Qual das seguintes afirmações sobre a Licença Pública Geral (GPL) é verdadeira?",
+      "options": ["Se você alterar um programa recebido sob a GPL, deve enviar suas alterações para aprovação do autor original.", "A GPL é idêntica à licença BSD.", "O software GPL não pode ser utilizado para controlar reatores nucleares ou sistemas de controle de tráfego aéreo.", "O software GPL nunca pode ser vendido por dinheiro.", "A GPL foi projetada para garantir que o código-fonte de um software permaneça disponível livremente."],
+      "answer": "A GPL foi projetada para garantir que o código-fonte de um software permaneça disponível livremente."
+    },
+    {
+      "question": "Qual palavra-chave está faltando no seguinte segmento de script shell?\n\nfor i in *; _____\n    cat $i\n    done",
+      "options": ["then", "enod", "do", "run", "fi"],
+      "answer": "do"
+    },
+    {
+      "question": "Qual comando é utilizado para tornar uma variável de shell conhecida para programas executados subsequentemente?",
+      "options": ["mv", "announce", "env", "transfer", "export"],
+      "answer": "export"
+    },
+    {
+      "question": "Qual dos seguintes comandos pode ser utilizado para criar um arquivo?",
+      "options": ["mkfile", "nico", "create", "touch", "build"],
+      "answer": "touch"
+    },
+    {
+      "question": "Qual dos seguintes pacotes de software é um servidor de e-mail?",
+      "options": ["Apache", "MySQL", "GIMP", "Thunderbird", "Postfix"],
+      "answer": "Postfix"
+    },
+    {
+      "question": "Qual comando exibirá a última linha do arquivo foo.txt?",
+      "options": ["last -n 1 foo.txt", "tail foo.txt", "head -n 1 foo.txt", "tail -n 1 foo.txt"],
+      "answer": "tail -n 1 foo.txt"
+    },
+    {
+      "question": "Qual é o comando adequado para encontrar a próxima ocorrência da palavra 'hidden' em uma página man sendo visualizada no terminal?",
+      "options": ["/? hidden", "CTRL-F hidden", "find hidden", "/hidden"],
+      "answer": "/hidden"
+    },
+    {
+      "question": "Como pode ser pesquisado o diretório atual e seus subdiretórios para o arquivo chamado MyFile.xml?",
+      "options": ["find . -name MyFile.xml", "less MyFile.xml", "grep MyFile.xml | find", "grep -r MyFile.xml .", "search Myfile.xml ./"],
+      "answer": "find . -name MyFile.xml"
+    },
+    {
+      "question": "Qual dos seguintes comandos aumenta o número de elementos em um diretório? (Escolha DUAS respostas.)",
+      "options": ["touch newfile", "mkdir newdirectory", "create newfile", "rmdir newdirectory", "ls newfile"],
+      "answer": "touch newfile, mkdir newdirectory"
+    },
+    {
+      "question": "Qual dos seguintes comandos move o diretório ~/summer-vacation e seu conteúdo para ~/vacation/2011?",
+      "options": ["mv ~/vacation/2011 ~/summer-vacation", "mv ~/summer-vacation ~/vacation/2011", "mv -R ~/summer-vacation ~/vacation/2011", "mv /home/summer-vacation /home/vacation/2011", "move -R ~/summer-vacation ~/vacation/2011"],
+      "answer": "mv ~/summer-vacation ~/vacation/2011"
+    },
+    {
+      "question": "Qual dos seguintes comandos pode ser utilizado para alterar tanto o proprietário quanto o grupo de um arquivo?",
+      "options": ["chage", "chmod", "chuser", "chown", "chgrp"],
+      "answer": "chown"
+    },
+    {
+      "question": "Qual das seguintes afirmativas sobre software Open Source é verdadeira?",
+      "options": ["Open Source software can not be copied for free.", "The freedom to redistribute copies must include binary or executable forms of the software but not the source code.", "Open Source software is available for commercial use.", "Open Source software is not for sale."],
+      "answer": "Open Source software is available for commercial use."
+    },
+    {
+      "question": "Qual dos seguintes comandos exibirá uma lista de todos os arquivos no diretório atual, incluindo os que possam estar ocultos?",
+      "options": ["ls -h", "ls –a", "ls -a", "ls --hidden"],
+      "answer": "ls -a"
+    },
+    {
+      "question": "A saída do programa date deve ser salva na variável actdat. Qual é a instrução correta?",
+      "options": ["date > $actdat", "actdat=date", "set actdat='date'", "actdat=`date`", "date | actdat"],
+      "answer": "actdat=`date`"
+    },
+    {
+      "question": "Qual das seguintes propriedades de uma conta de usuário determina se o usuário possui privilégios de administrador?",
+      "options": ["Its user ID is 0 (zero).", "Its primary group ID is 0 (zero).", "Its username is root.", "It is listed first in /etc/passwd", "Its GECOS (name) field is set to \"System Administrator\""],
+      "answer": "Its user ID is 0 (zero)."
+    },
+    {
+      "question": "Qual é a saída do seguinte comando?\n\nfor token in a b c; do\n    echo -n ${token};\ndone",
+      "options": ["{a}{b}{c}", "abc", "anbncn", "a b c", "$token$token$token"],
+      "answer": "abc"
+    },
+    {
+      "question": "Qual opção fará com que o comando echo NÃO exiba uma nova linha no final?",
+      "options": ["-p", "-e", "-s", "-n"],
+      "answer": "-n"
+    },
+    {
+      "question": "Qual dos seguintes programas NÃO é um navegador web gráfico?",
+      "options": ["Links", "Firefox", "Opera", "Konqueror", "Chrome"],
+      "answer": "Links"
+    },
+    {
+      "question": "Qual dos seguintes comandos pode ser usado para visualizar um arquivo e realizar operações de busca dentro dele enquanto visualiza seu conteúdo?",
+      "options": ["less", "report", "see", "find", "grep"],
+      "answer": "less"
+    },
+    {
+      "question": "Qual linha de comando pode ser usada para pesquisar arquivos de ajuda que mencionam a palavra 'copy'?",
+      "options": ["man copy", "copy –help", "man -k copy", "copy help", "whatis copy"],
+      "answer": "man -k copy"
+    },
+    {
+      "question": "Qual é o primeiro caractere para nomes de arquivos ou diretórios que não devem ser exibidos por comandos como ls, a menos que especificamente solicitado?",
+      "options": ["\\ (backslash)", "- (minus)", "_ (underscore)", ". (dot)"],
+      "answer": ". (dot)"
+    },
+    {
+      "question": "Qual dos seguintes é um requisito da licença GPL, mas não da licença BSD? (Escolha TRÊS alternativas corretas.)",
+      "options": ["Users who modify and distribute the software under the GPL license, must make the modifications they made, available to the recipients under the same license.", "The GPL license requires that any legal disputes be settled with the mediation of the Free Software Foundation.", "The GPL license contains a disclaimer of warranty requiring users not to hold the software authors liable for any damages.", "The GPL license forbids the removal of copyright and license notices from source code files that are distributed."],
+      "answer": "Users who modify and distribute the software under the GPL license, must make the modifications they made, available to the recipients under the same license."
+    },
+    {
+      "question": "Qual distribuição Linux é usada como base para a criação do Ubuntu Linux?",
+      "options": ["Gentoo Linux", "Arch Linux", "Debian Linux", "Red Hat Linux", "SUSE Linux"],
+      "answer": "Debian Linux"
+    },
+    {
+      "question": "Qual das seguintes respostas é verdadeira para a computação em nuvem? (Escolha DUAS respostas corretas.)",
+      "options": ["Cloud Computing is the opposite of green IT; i.e. the use of fossil, non-regenerative energy for computing.", "From the business perspective, Cloud Computing means outsourcing or centralization of IT operations.", "Cloud Computing implies sharing all information with everyone else in \"the cloud\".", "Cloud Computing provides new tools to manage IT resources."],
+      "answer": "From the business perspective, Cloud Computing means outsourcing or centralization of IT operations., Cloud Computing provides new tools to manage IT resources."
+    },
+    {
+      "question": "Qual sequência de dois caracteres está presente no início de um script interpretado?",
+      "options": ["#!#", "!!", "!#", "#!", "##"],
+      "answer": "#!"
+    },
+    {
+      "question": "Ao digitar uma linha de comando longa no shell, qual caractere único pode ser usado para dividir um comando em várias linhas?",
+      "options": ["\"", "/", "\\", "~", "!"],
+      "answer": "\\"
+    },
+    {
+      "question": "Quais permissões são definidas em um arquivo com o comando chmod 654 file.txt?",
+      "options": ["d--wxr-x--", "--wxr-x--x", "-rwxrw---x", "drw-r-xr--", "-rw-r-xr--"],
+      "answer": "-rw-r-xr--"
+    },
+    {
+      "question": "O que significa LAMP?",
+      "options": ["The bus ID of an attached USB device that emits light.", "Short for Lightweight Access Management Protocol which synchronizes permissions in a network.", "The Linux Advanced Mode Programming Interface which gives advanced capabilities to application developers.", "The combination of Linux, Apache, MySQL and PHP or other programming languages.", "Short for lamport-clock which is important in distributed network computing."],
+      "answer": "The combination of Linux, Apache, MySQL and PHP or other programming languages."
+    },
+    {
+      "question": "Qual dos seguintes pode ser usado para acessar a linha de comando?",
+      "options": ["XWindow", "Firefox", "Terminal", "BIOS", "Xargs"],
+      "answer": "Terminal"
+    },
+    {
+      "question": "Qual função um programa shell desempenha?",
+      "options": ["It is responsible for logging a user into the system.", "It receives user commands and executes them.", "It is responsible for establishing a connection to another computer.", "It provides a graphical environment."],
+      "answer": "It receives user commands and executes them."
+    },
+    {
+      "question": "Qual comando lista todos os arquivos no diretório atual que começam com uma letra maiúscula?",
+      "options": ["ls [A-Z]*", "ls A-Z", "ls --uppercasefiles", "ls A-Z*", "list-uppercase-files"],
+      "answer": "ls [A-Z]*"
+    },
+    {
+      "question": "Qual dos seguintes comandos irá criar um arquivo de backup, chamado backup.tar, contendo todos os arquivos do diretório /home?",
+      "options": ["tar -cf /home backup.tar", "tar -xf /home backup.tar", "tar -xf backup.tar /home", "tar /home backup.tar", "tar -cf backup.tar /home"],
+      "answer": "tar -cf backup.tar /home"
+    },
+    {
+      "question": "Qual dos seguintes irá alterar o grupo associado a um arquivo?",
+      "options": ["ls -g", "chmod -w", "chown", "chmod"],
+      "answer": "chown"
+    }
+  ]

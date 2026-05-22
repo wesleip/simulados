@@ -1,0 +1,81 @@
+[
+    {
+      "question": "Qual comando exibe o uso de memória no Linux?",
+      "options": ["free", "lsmem", "meminfo", "topmem"],
+      "answer": "free"
+    },
+    {
+      "question": "Quais comandos listam processos em execução? (Escolha duas respostas)",
+      "options": ["ps", "top", "kill", "listproc", "htop"],
+      "answer": "ps, top"
+    },
+    {
+      "question": "O que faz o comando 'whoami'?",
+      "options": ["Mostra o nome do usuário atual", "Lista usuários logados", "Altera o nome do usuário", "Exibe informações do sistema"],
+      "answer": "Mostra o nome do usuário atual"
+    }
+    ,
+    {
+      "question": "Qual comando é usado para mudar de diretório?",
+      "options": ["cd", "mv", "dir", "chdir"],
+      "answer": "cd"
+    },
+    {
+      "question": "Qual comando é usado para copiar arquivos?",
+      "options": ["cp", "copy", "mv", "xcopy"],
+      "answer": "cp"
+    },
+    {
+      "question": "Qual comando é usado para mover arquivos?",
+      "options": ["mv", "move", "cp", "rename"],
+      "answer": "mv"
+    },
+    {
+      "question": "Qual comando é usado para remover arquivos?",
+      "options": ["rm", "del", "erase", "rmdir"],
+      "answer": "rm"
+    }
+    ,
+    {
+      "question": "Qual comando é usado para criar um diretório?",
+      "options": ["mkdir", "md", "newdir", "createdir"],
+      "answer": "mkdir"
+    },
+    {
+      "question": "Qual comando é usado para listar arquivos em um diretório?",
+      "options": ["ls", "dir", "list", "show"],
+      "answer": "ls"
+    },
+    {
+      "question": "Qual comando é usado para exibir o conteúdo de um arquivo?",
+      "options": ["cat", "show", "more", "less"],
+      "answer": "cat"
+    }
+    ,
+    {
+      "question": "Qual comando é usado para buscar por arquivos?",
+      "options": ["find", "search", "locate", "grep"],
+      "answer": "find"
+    },
+    {
+      "question": "Qual comando é usado para exibir o conteúdo de um arquivo página por página?",
+      "options": ["more", "less", "cat", "view"],
+      "answer": "more"
+    },
+    {
+      "question": "Qual comando é usado para alterar permissões de arquivos?",
+      "options": ["chmod", "chown", "perm", "access"],
+      "answer": "chmod"
+    }
+    ,
+    {
+      "question": "Qual comando é usado para alterar o proprietário de um arquivo?",
+      "options": ["chown", "chmod", "owner", "user"],
+      "answer": "chown"
+    },
+    {
+      "question": "Qual comando é usado para exibir o caminho do diretório atual?",
+      "options": ["pwd", "path", "currentdir", "dir"],
+      "answer": "pwd"
+    }
+]

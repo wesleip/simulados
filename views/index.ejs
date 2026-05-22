@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+<body class="bg-gray-100 font-sans antialiased">
+
+    <!-- Cabeçalho -->
+    <header class="bg-blue-600 text-white p-6 text-center">
+        <h1 class="text-3xl font-bold">Simulados LPI</h1>
+        <p class="text-xl mt-2">Prepare-se para os exames de certificação Linux Professional Institute</p>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Sessões de Níveis -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Escolha o seu nível de simulado</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <!-- Entry Level -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <img src="/img/essentials.svg" alt="Essentials" class="w-full h-30 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold text-blue-600">LPI Essentials</h3>
+                            <p class="text-gray-600 mt-2">Simulado para o nível inicial de certificação LPI Essentials. Prepare-se para os desafios do mundo Linux.</p>
+                            <a href="/select" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Iniciar Simulado</a>
+                        </div>
+                    </div>
+
+                    <!-- LPIC-1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden relative opacity-75">
+                        <span class="absolute top-2 right-2 bg-gray-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Em breve</span>
+                        <img src="/img/lpi1.svg" alt="LPIC-1" class="w-full h-30 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold text-gray-500">LPIC-1 (System Administrator)</h3>
+                            <p class="text-gray-400 mt-2">Simulado avançado para o LPIC-1. Teste seu conhecimento em tópicos fundamentais do Linux.</p>
+                            <span class="mt-4 inline-block bg-gray-400 text-white py-2 px-4 rounded-lg cursor-not-allowed">Em breve</span>
+                        </div>
+                    </div>
+
+                    <!-- LPIC-2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden relative opacity-75">
+                        <span class="absolute top-2 right-2 bg-gray-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Em breve</span>
+                        <img src="/img/lpi2.svg" alt="LPIC-2" class="w-full h-30 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold text-gray-500">LPIC-2 (Network Administrator)</h3>
+                            <p class="text-gray-400 mt-2">Simulado intermediário para o LPIC-2. Desafios focados em administração de sistemas Linux.</p>
+                            <span class="mt-4 inline-block bg-gray-400 text-white py-2 px-4 rounded-lg cursor-not-allowed">Em breve</span>
+                        </div>
+                    </div>
+
+                    <!-- LPIC-3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden relative opacity-75">
+                        <span class="absolute top-2 right-2 bg-gray-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Em breve</span>
+                        <img src="/img/lpi3.svg" alt="LPIC-3" class="w-full h-30 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold text-gray-500">LPIC-3 (Contenerization and Virtualization)</h3>
+                            <p class="text-gray-400 mt-2">Simulado avançado para o LPIC-3. Prepare-se para as certificações de nível mais alto.</p>
+                            <span class="mt-4 inline-block bg-gray-400 text-white py-2 px-4 rounded-lg cursor-not-allowed">Em breve</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Seção sobre -->
+            <section>
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Sobre os Simulados</h2>
+                <p class="text-lg text-gray-700 text-center max-w-2xl mx-auto">Os simulados são baseados nos conteúdos exigidos para as certificações oficiais do Linux Professional Institute (LPI). Eles são projetados para fornecer uma experiência de teste realista, com questões atualizadas e relevantes para cada nível de certificação.</p>
+            </section>
+
+        </div>
+    </main>
+    <%- include('partials/footer') %>
+</body>
+
+</html>
+
+
