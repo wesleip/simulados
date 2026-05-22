@@ -110,7 +110,7 @@ const isAuthenticated = (req, res, next) => {
 };
 
 app.get("/", (req, res) => {
-  res.render("index", {});
+  res.render("index", { pageTitle: "Início" });
 });
 
 // Simulado 1
@@ -120,9 +120,10 @@ app.get("/essentials", (req, res) => {
       console.error(err);
       return res.status(500).send("Erro ao acessar o banco de dados.");
     }
-    res.render("essentials", {
+    res.render("simulado", {
       questions: questions,
       initialQuestionIndex: 0,
+      pageTitle: "Simulado 1",
     });
   });
 });
@@ -134,9 +135,10 @@ app.get("/essentials2", (req, res) => {
       console.error(err);
       return res.status(500).send("Erro ao acessar o banco de dados.");
     }
-    res.render("essentials2", {
+    res.render("simulado", {
       questions: questions,
       initialQuestionIndex: 0,
+      pageTitle: "Simulado 2",
     });
   });
 });
@@ -190,14 +192,15 @@ app.get("/eresult", (req, res) => {
       redirectText: "Voltar ao Início",
       redirectUrl: "/",
       retryUrl: "/select",
+      pageTitle: "Erro",
     });
   } else {
-    res.render("eresult", latestResults);
+    res.render("eresult", { ...latestResults, pageTitle: "Resultados" });
   }
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { error: null });
+  res.render("login", { error: null, pageTitle: "Login" });
 });
 
 app.post("/login", (req, res) => {
@@ -212,7 +215,7 @@ app.post("/login", (req, res) => {
         req.session.authenticated = true;
         res.redirect("/management");
       } else {
-        res.render("login", { error: "Usuário ou senha inválidos." });
+        res.render("login", { error: "Usuário ou senha inválidos.", pageTitle: "Login" });
       }
     });
   });
@@ -260,6 +263,7 @@ app.get("/management", isAuthenticated, (req, res) => {
         };
 
         res.render("management", {
+          pageTitle: "Dashboard",
           questionCount1: row1.questionCount1,
           questionCount2: row2.questionCount2,
           submissionCount1: submissionCount1,
@@ -277,7 +281,7 @@ app.get("/management", isAuthenticated, (req, res) => {
 });
 
 app.get("/select", (req, res) => {
-  res.render("select", {});
+  res.render("select", { pageTitle: "Escolher Simulado" });
 })
 
 app.listen(port, () => {

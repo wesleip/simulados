@@ -1,0 +1,75 @@
+<%- include ('partials/header') %>
+
+<body class="bg-gray-100 font-sans antialiased">
+    <header class="bg-blue-600 text-white p-6 text-center">
+        <h1 class="text-3xl font-bold">Simulado LPI Essentials</h1>
+        <p class="text-xl mt-2">Prepare-se para o exame de certificação Linux Professional Institute</p>
+    </header>
+
+    <main class="py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Timer e botões de controle -->
+            <section class="mb-8 text-center">
+                <p id="timer" class="text-xl font-semibold text-gray-700">Tempo restante: 60:00</p>
+                <div class="mt-3 max-w-xl mx-auto">
+                    <div class="flex justify-between text-sm text-gray-500 mb-1">
+                        <span id="progress-label">0 respondidas</span>
+                        <span id="progress-total"></span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-2">
+                        <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="text-center">
+                <button id="startBtn" class="bg-blue-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition duration-300">Iniciar Simulado</button>
+                <button id="pauseBtn" class="bg-yellow-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-yellow-700 transition duration-300 mt-4" disabled>Pausar</button>
+                <button id="resumeBtn" class="bg-green-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-green-700 transition duration-300 mt-4" disabled>Retomar</button>
+            </section>
+
+            <!-- Mapa de Questões -->
+            <section class="mt-8">
+                <div id="question-map" class="flex flex-wrap gap-2 justify-center"></div>
+                <div class="flex gap-4 justify-center mt-3 text-sm text-gray-500">
+                    <span class="flex items-center gap-1"><span class="inline-block w-4 h-4 rounded bg-blue-600"></span> Atual</span>
+                    <span class="flex items-center gap-1"><span class="inline-block w-4 h-4 rounded bg-green-500"></span> Respondida</span>
+                    <span class="flex items-center gap-1"><span class="inline-block w-4 h-4 rounded bg-gray-300"></span> Sem resposta</span>
+                </div>
+            </section>
+
+            <!-- Container da Questão -->
+            <section class="mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Questão <span id="question-counter">1/X</span></h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                    <div id="question-container">
+                        <h3 id="question-text"></h3>
+                        <ul id="options-list" class="list-unstyled"></ul>
+                    </div>
+                </div>
+
+                <!-- Botões de Navegação -->
+                <section class="text-center mt-8">
+                    <button id="prevButton" class="bg-gray-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-gray-700 transition duration-300 mr-4">
+                        Questão Anterior
+                    </button>
+                    <button id="nextButton" class="bg-blue-600 text-white py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition duration-300">
+                        Próxima Questão
+                    </button>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script>
+        window.SIMULADO = {
+            questions: <%- JSON.stringify(questions) %>,
+            initialQuestionIndex: <%- initialQuestionIndex %>
+        };
+    </script>
+    <script src="/js/simulado.js"></script>
+</body>
+</html>
