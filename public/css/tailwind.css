@@ -314,8 +314,8 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
-  .h-30 {
-    height: calc(var(--spacing) * 30);
+  .h-36 {
+    height: calc(var(--spacing) * 36);
   }
   .min-h-screen {
     min-height: 100vh;
@@ -495,8 +495,8 @@
   .bg-yellow-600 {
     background-color: var(--color-yellow-600);
   }
-  .object-cover {
-    object-fit: cover;
+  .object-contain {
+    object-fit: contain;
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
