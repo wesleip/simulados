@@ -4,7 +4,10 @@
   "description": "Simulados LPI - Linux Professional Institute",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css:build": "tailwindcss -i src/input.css -o public/css/tailwind.css --content './views/**/*.ejs,./public/js/**/*.js'",
+    "css:watch": "tailwindcss -i src/input.css -o public/css/tailwind.css --content './views/**/*.ejs,./public/js/**/*.js' --watch",
+    "start": "node app.js"
   },
   "author": "Weslei Paulo Pereira",
   "license": "ISC",
@@ -15,5 +18,9 @@
     "express": "^5.1.0",
     "express-session": "^1.18.1",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "tailwindcss": "^4.3.0"
   }
 }
