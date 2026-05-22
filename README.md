@@ -67,4 +67,4 @@ Para questões de múltipla resposta, separe as respostas com `", "`:
 
 ## Licença
 
-ISC
+MIT — livre para usar, modificar e distribuir.
